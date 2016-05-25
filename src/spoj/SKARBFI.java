@@ -1,4 +1,4 @@
-package examples;
+package spoj;
 import java.util.Scanner;
 
 public class SKARBFI {
