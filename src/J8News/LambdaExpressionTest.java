@@ -1,51 +1,33 @@
 package J8News;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LambdaExpressionTest {
 
 	// parameter -> expression body
 
 	public static void main(String[] args) {
-		LambdaExpressionTest lambdaExpressionTest = new LambdaExpressionTest();
-
-		// with type declaration
-		MathOperation addition = (int a, int b) -> a + b;
-
-		// with out type declaration
-		MathOperation subtraction = (a, b) -> a - b;
-
-		// with return statement along with curly braces
-		MathOperation multiplication = (int a, int b) -> {
-			return a * b;
-		};
-
-		// without return statement and without curly braces
-		MathOperation division = (int a, int b) -> a / b;
-
-		System.out.println("10 + 5 = " + lambdaExpressionTest.operate(10, 5, addition));
-		System.out.println("10 - 5 = " + lambdaExpressionTest.operate(10, 5, subtraction));
-		System.out.println("10 x 5 = " + lambdaExpressionTest.operate(10, 5, multiplication));
-		System.out.println("10 / 5 = " + lambdaExpressionTest.operate(10, 5, division));
-
-		// with parenthesis
-		GreetingService greetService1 = message -> System.out.println("Hello " + message);
-
-		// without parenthesis
-		GreetingService greetService2 = (message) -> System.out.println("Hello " + message);
-
-		greetService1.sayMessage("D¿ony");
-		greetService2.sayMessage("Janek");
+		
+		//Example implement simple interface
+		Powitanie powitanie = msg -> System.out.println("Hello " + msg);
+		powitanie.wiadomosc("Agata");
+		
+		
+		//method
+		List lista = new ArrayList();
+		
+		lista.add("Janek");
+		lista.add("Majkel");
+		lista.add("Agatka");
+		
+		lista.forEach(System.out::println);
+		
+		
 	}
-
-	interface MathOperation {
-		int operation(int a, int b);
-	}
-
-	interface GreetingService {
-		void sayMessage(String message);
-	}
-
-	private int operate(int a, int b, MathOperation mathOperation) {
-		return mathOperation.operation(a, b);
+	
+	interface Powitanie {
+		void wiadomosc(String msg);
 	}
 
 }
