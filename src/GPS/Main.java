@@ -29,25 +29,31 @@ public class Main {
 				case "GSV":
 					System.out.println("GSV");
 					break;
-				case "RMC":				
+				case "RMC":
 					String helpVar;
-					System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
-					helpVar = st.nextToken();
-					System.out.println("Aktualnoœæ danych: " + helpVar.substring(0, 2) + ":" + helpVar.substring(2, 4) + ":" + helpVar.substring(4, 6) + " UTC");
-					System.out.println("Status: " + st.nextToken());
-					helpVar = st.nextToken();
-					System.out.println("Szerokoœæ geograficzna: " + helpVar.substring(0, 2) + " deg " + helpVar.substring(2) + "' " + st.nextToken());
-					helpVar = st.nextToken();
-					System.out.println("D³ugoœæ geograficzna: " + helpVar.substring(0, 2) + " deg " + helpVar.substring(2) + "' " + st.nextToken());
-					System.out.println("Prêdkoœæ obiektu: " + st.nextToken());
-					System.out.println("K¹t poruszania siê obiektu: " + st.nextToken());
-					helpVar = st.nextToken();
-					System.out.println("Data: " + helpVar.substring(0, 2) + "." + helpVar.substring(2, 4) + "." + helpVar.substring(4, 6));
-					System.out.println("Odchylenie magnetyczne ziemi: " + st.nextToken() + " " + st.nextToken());
-					if(st.hasMoreTokens())
-					System.out.println("Suma kontrolna: " + st.nextToken());
-					
-					
+					try {
+						System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
+						helpVar = st.nextToken();
+						System.out.println("Aktualnoœæ danych: " + helpVar.substring(0, 2) + ":"
+								+ helpVar.substring(2, 4) + ":" + helpVar.substring(4, 6) + " UTC");
+						System.out.println("Status: " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("Szerokoœæ geograficzna: " + helpVar.substring(0, 2) + " deg "
+								+ helpVar.substring(2) + "' " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("D³ugoœæ geograficzna: " + helpVar.substring(0, 2) + " deg "
+								+ helpVar.substring(2) + "' " + st.nextToken());
+						System.out.println("Prêdkoœæ obiektu: " + st.nextToken());
+						System.out.println("K¹t poruszania siê obiektu: " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("Data: " + helpVar.substring(0, 2) + "." + helpVar.substring(2, 4) + "."
+								+ helpVar.substring(4, 6));
+						System.out.println("Odchylenie magnetyczne ziemi: " + st.nextToken() + " " + st.nextToken());
+						System.out.println("Suma kontrolna: " + st.nextToken());
+					} catch (Exception e) {
+						break;
+					}
+
 					System.out.println("----------------------");
 					break;
 				case "VTG":
