@@ -3,6 +3,7 @@ package GPS;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
 
@@ -13,6 +14,7 @@ public class Main {
 		while (in.hasNextLine()) {
 			if (pattern.substring(0, 1).equals("$") && pattern.length() <= 82) {
 				System.out.println(pattern = in.nextLine());
+				StringTokenizer st = new StringTokenizer(pattern, ",");
 
 				switch (pattern.substring(3, 6)) {
 				case "GGA":
@@ -27,12 +29,26 @@ public class Main {
 				case "GSV":
 					System.out.println("GSV");
 					break;
-				case "RMC":
-					System.out.println("RMC");
-					System.out.println(pattern.substring(pattern.indexOf(",")+1, 9) + ":" + pattern.substring(9, 11) + ":" + pattern.substring(11, 13) + " UTC");
-					System.out.println("status: " + pattern.substring(14, 15));
-					System.out.println(pattern.substring(16, 18) + " deg " + pattern.substring(18, 24) + "'" + pattern.substring(25, 26));
-					System.out.println(pattern.substring(27, 29) + " deg " + pattern.substring(29, 35));
+				case "RMC":				
+					String helpVar;
+					System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
+					helpVar = st.nextToken();
+					System.out.println("Aktualnoœæ danych: " + helpVar.substring(0, 2) + ":" + helpVar.substring(2, 4) + ":" + helpVar.substring(4, 6) + " UTC");
+					System.out.println("Status: " + st.nextToken());
+					helpVar = st.nextToken();
+					System.out.println("Szerokoœæ geograficzna: " + helpVar.substring(0, 2) + " deg " + helpVar.substring(2) + "' " + st.nextToken());
+					helpVar = st.nextToken();
+					System.out.println("D³ugoœæ geograficzna: " + helpVar.substring(0, 2) + " deg " + helpVar.substring(2) + "' " + st.nextToken());
+					System.out.println("Prêdkoœæ obiektu: " + st.nextToken());
+					System.out.println("K¹t poruszania siê obiektu: " + st.nextToken());
+					helpVar = st.nextToken();
+					System.out.println("Data: " + helpVar.substring(0, 2) + "." + helpVar.substring(2, 4) + "." + helpVar.substring(4, 6));
+					System.out.println("Odchylenie magnetyczne ziemi: " + st.nextToken() + " " + st.nextToken());
+					if(st.hasMoreTokens())
+					System.out.println("Suma kontrolna: " + st.nextToken());
+					
+					
+					System.out.println("----------------------");
 					break;
 				case "VTG":
 					System.out.println("VTG");
