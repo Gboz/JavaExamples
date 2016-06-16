@@ -7,10 +7,14 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+	public static final String warning = "WARNING -> Problem z parsowaniem danych / niepoprawna sekwencja danych!";
+	public static final String unknownSequence = "Nieznana sekwencja";
+	public static final String separator = "-----------------------------------------------------------------------------";
+
 	public static void main(String[] args) throws FileNotFoundException {
 		Scanner in = new Scanner(new File("dane.txt"));
 		String pattern = in.nextLine();
-		String helpVar01;
+		String helpVar;
 
 		while (in.hasNextLine()) {
 			if (pattern.substring(0, 1).equals("$") && pattern.length() <= 82) {
@@ -19,39 +23,76 @@ public class Main {
 
 				switch (pattern.substring(3, 6)) {
 				case "GGA":
-					System.out.println("GGA");
-					System.out.println("---------------------------------------------------------");
+					try {
+						System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
+						helpVar = st.nextToken();
+						System.out.println("Aktualnoœæ danych: " + helpVar.substring(0, 2) + ":"
+								+ helpVar.substring(2, 4) + ":" + helpVar.substring(4, 6) + " UTC");
+						helpVar = st.nextToken();
+						System.out.println("Szerokoœæ geograficzna: " + helpVar.substring(0, 2) + " deg "
+								+ helpVar.substring(2) + "' " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("D³ugoœæ geograficzna: " + helpVar.substring(0, 2) + " deg "
+								+ helpVar.substring(2) + "' " + st.nextToken());
+						System.out.println("Jakoœæ pomiaru: " + st.nextToken());
+						System.out.println("Liczba œledzonych satelit: " + st.nextToken());
+						System.out.println("Horyzontalna dok³adnoœæ pozycji: " + st.nextToken());
+						System.out.println(
+								"Wysokoœæ w metrach nad poziom morza: " + st.nextToken() + " " + st.nextToken());
+						System.out.println("Wysokoœæ geoid: " + st.nextToken() + " " + st.nextToken());
+						System.out.println("Suma kontrolna: " + st.nextToken());
+					} catch (Exception e) {
+						System.out.println(warning);
+						System.out.println(separator);
+						break;
+					}
+					System.out.println(separator);
 					break;
 				case "GLL":
-					System.out.println("GLL");
-					System.out.println("---------------------------------------------------------");
+					try {
+						System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
+						helpVar = st.nextToken();
+						System.out.println("Szerokoœæ geograficzna: " + helpVar.substring(0, 2) + " deg "
+								+ helpVar.substring(2) + "' " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("D³ugoœæ geograficzna: " + helpVar.substring(0, 2) + " deg "
+								+ helpVar.substring(2) + "' " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("Czas ustalenia pozycji: " + helpVar.substring(0, 2) + ":"
+								+ helpVar.substring(2, 4) + ":" + helpVar.substring(4, 6));
+						System.out.println("Status: " + st.nextToken());
+					} catch (Exception e) {
+						System.out.println(warning);
+						System.out.println(separator);
+						break;
+					}
+					System.out.println(separator);
 					break;
 				case "GSA":
 					try {
 						System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
 						System.out.println("Automatyczny wybór pozycji: " + st.nextToken() + " " + st.nextToken());
 						System.out.print("Numery satelit: " + st.nextToken());
-						helpVar01 = st.nextToken();
-						while (!helpVar01.equals("")) {
-							double d = Double.valueOf(helpVar01);
+						helpVar = st.nextToken();
+						while (!helpVar.equals("")) {
+							double d = Double.valueOf(helpVar);
 							if (d == (int) d) {
-								System.out.print(", " + helpVar01);
-								helpVar01 = st.nextToken();
+								System.out.print(", " + helpVar);
+								helpVar = st.nextToken();
 							} else {
 								System.out.println();
 								break;
 							}
 						}
-						System.out.println("Precyzja wyznaczonej pozycji: " + helpVar01);
+						System.out.println("Precyzja wyznaczonej pozycji: " + helpVar);
 						System.out.println("Horyzontalna precyzja wyznaczonej pozycji: " + st.nextToken());
 						System.out.println("Wertykalna precyzja wyznaczonej pozycji: " + st.nextToken());
 						System.out.println("Suma kontrolna: " + st.nextToken());
-
 					} catch (Exception e) {
-						System.out.println("---------------------------------------------------------");
+						System.out.println(warning);
+						System.out.println(separator);
 						continue;
 					}
-
 					break;
 				case "GSV":
 					try {
@@ -65,54 +106,67 @@ public class Main {
 						System.out.println("Poziom odbierania sygna³u: " + st.nextToken());
 						// TODO
 					} catch (Exception e) {
-						System.out.println("---------------------------------------------------------");
+						System.out.println(warning);
+						System.out.println(separator);
 						break;
 					}
-
-					System.out.println("---------------------------------------------------------");
+					System.out.println(separator);
 					break;
 				case "RMC":
 					try {
 						System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
-						helpVar01 = st.nextToken();
-						System.out.println("Aktualnoœæ danych: " + helpVar01.substring(0, 2) + ":"
-								+ helpVar01.substring(2, 4) + ":" + helpVar01.substring(4, 6) + " UTC");
+						helpVar = st.nextToken();
+						System.out.println("Aktualnoœæ danych: " + helpVar.substring(0, 2) + ":"
+								+ helpVar.substring(2, 4) + ":" + helpVar.substring(4, 6) + " UTC");
 						System.out.println("Status: " + st.nextToken());
-						helpVar01 = st.nextToken();
-						System.out.println("Szerokoœæ geograficzna: " + helpVar01.substring(0, 2) + " deg "
-								+ helpVar01.substring(2) + "' " + st.nextToken());
-						helpVar01 = st.nextToken();
-						System.out.println("D³ugoœæ geograficzna: " + helpVar01.substring(0, 2) + " deg "
-								+ helpVar01.substring(2) + "' " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("Szerokoœæ geograficzna: " + helpVar.substring(0, 2) + " deg "
+								+ helpVar.substring(2) + "' " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("D³ugoœæ geograficzna: " + helpVar.substring(0, 2) + " deg "
+								+ helpVar.substring(2) + "' " + st.nextToken());
 						System.out.println("Prêdkoœæ obiektu: " + st.nextToken());
 						System.out.println("K¹t poruszania siê obiektu: " + st.nextToken());
-						helpVar01 = st.nextToken();
-						System.out.println("Data: " + helpVar01.substring(0, 2) + "." + helpVar01.substring(2, 4) + "."
-								+ helpVar01.substring(4, 6));
+						helpVar = st.nextToken();
+						System.out.println("Data: " + helpVar.substring(0, 2) + "." + helpVar.substring(2, 4) + "."
+								+ helpVar.substring(4, 6));
 						System.out.println("Odchylenie magnetyczne ziemi: " + st.nextToken() + " " + st.nextToken());
 						System.out.println("Suma kontrolna: " + st.nextToken());
 					} catch (Exception e) {
-						System.out.println("---------------------------------------------------------");
+						System.out.println(warning);
+						System.out.println(separator);
 						break;
 					}
-					System.out.println("---------------------------------------------------------");
+					System.out.println(separator);
 					break;
 				case "VTG":
-					System.out.println("VTG");
-					System.out.println("---------------------------------------------------------");
+					try {
+						System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
+						helpVar = st.nextToken();
+						System.out.println("Œcie¿ka poruszania siê w stopniach: " + helpVar + " " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("Œcie¿ka poruszania siê na podstawie wspó³rzêdnych magnetycznych: " + helpVar
+								+ " " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("Prêdkoœæ w wêz³ach: " + helpVar + " " + st.nextToken());
+						helpVar = st.nextToken();
+						System.out.println("Prêdkoœæ w km/h: " + helpVar + " " + st.nextToken());
+					} catch (Exception e) {
+						System.out.println(warning);
+						System.out.println(separator);
+						break;
+					}
+					System.out.println(separator);
 					break;
 				default:
-					System.out.println("Nieznana sekwencja");
-					System.out.println("---------------------------------------------------------");
+					System.out.println(unknownSequence);
+					System.out.println(separator);
 					break;
 				}
-
 			} else {
 				continue;
 			}
-
 		}
 		in.close();
 	}
-
 }
