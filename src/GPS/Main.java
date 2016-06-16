@@ -20,10 +20,11 @@ public class Main {
 				switch (pattern.substring(3, 6)) {
 				case "GGA":
 					System.out.println("GGA");
-
+					System.out.println("---------------------------------------------------------");
 					break;
 				case "GLL":
 					System.out.println("GLL");
+					System.out.println("---------------------------------------------------------");
 					break;
 				case "GSA":
 					try {
@@ -45,7 +46,6 @@ public class Main {
 						System.out.println("Horyzontalna precyzja wyznaczonej pozycji: " + st.nextToken());
 						System.out.println("Wertykalna precyzja wyznaczonej pozycji: " + st.nextToken());
 						System.out.println("Suma kontrolna: " + st.nextToken());
-						
 
 					} catch (Exception e) {
 						System.out.println("---------------------------------------------------------");
@@ -54,7 +54,22 @@ public class Main {
 
 					break;
 				case "GSV":
-					System.out.println("GSV");
+					try {
+						System.out.println("Nag³ówek: " + st.nextToken().substring(3, 6));
+						System.out.println("Liczba linii, które powinna otrzymaæ aplikacja: " + st.nextToken());
+						System.out.println("Aktualna linia: " + st.nextToken());
+						System.out.println("Liczba aktualnie widocznych satelitów: " + st.nextToken());
+						System.out.println("Identyfikator PRN satelity: " + st.nextToken());
+						System.out.println("Wyniesienie satelity nad poziom równika: " + st.nextToken());
+						System.out.println("Azymut satelity: " + st.nextToken());
+						System.out.println("Poziom odbierania sygna³u: " + st.nextToken());
+						// TODO
+					} catch (Exception e) {
+						System.out.println("---------------------------------------------------------");
+						break;
+					}
+
+					System.out.println("---------------------------------------------------------");
 					break;
 				case "RMC":
 					try {
@@ -84,6 +99,7 @@ public class Main {
 					break;
 				case "VTG":
 					System.out.println("VTG");
+					System.out.println("---------------------------------------------------------");
 					break;
 				default:
 					System.out.println("Nieznana sekwencja");
